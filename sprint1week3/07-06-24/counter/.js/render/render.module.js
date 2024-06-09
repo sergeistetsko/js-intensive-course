@@ -1,4 +1,3 @@
-import { setChangeDataCallback } from '../data/data.module.js'
 import { Counter } from './components/Counter/Counter.js'
 
 export function render() {
