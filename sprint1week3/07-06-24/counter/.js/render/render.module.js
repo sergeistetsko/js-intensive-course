@@ -9,4 +9,3 @@ export function render() {
         Counter()
     )
 }
-setChangeDataCallback(render)
