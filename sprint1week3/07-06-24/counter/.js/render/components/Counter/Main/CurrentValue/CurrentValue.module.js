@@ -1,11 +1,11 @@
+import { data } from '../../../../../data/data.module.js'
 
-
-export function CurrentValue(currentValue) {
+export function CurrentValue() {
     const container = document.createElement('div')
     container.classList.add('current-value')
 
     const spanElement = document.createElement('span')
-    spanElement.innerText = currentValue
+    spanElement.innerText = data.currentValue
 
     container.append(
         spanElement

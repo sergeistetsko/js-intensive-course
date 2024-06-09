@@ -1,15 +1,22 @@
-import { render } from '../render/render.module.js'
-
 export const data = {
     maxValue: 10,
-    currentValue: 3
+    currentValue: 0
 }
 
-function increment() {
+let changeDataCallback = function() {}
+
+export function setChangeDataCallback(newCallback) {
+    changeDataCallback = newCallback
+}
+
+export function increment() {
     if (data.currentValue < data.maxValue) {
         data.currentValue = data.currentValue + 1
     }
-    render(data)
+    changeDataCallback()
 }
 
-setInterval(increment, 1000)
+export function reset() {
+    data.currentValue = 0
+    changeDataCallback()
+}

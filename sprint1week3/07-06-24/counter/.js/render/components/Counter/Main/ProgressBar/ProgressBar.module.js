@@ -1,4 +1,6 @@
-export function ProgressBar(data) {
+import { data } from '../../../../../data/data.module.js'
+
+export function ProgressBar() {
     const container = document.createElement('div')
     container.classList.add('progress-bar-container')
 
