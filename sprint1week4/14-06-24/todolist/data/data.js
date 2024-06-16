@@ -25,7 +25,7 @@ export const data = {
 
 let changeDataCallback = () => {}
 
-function setSubscriber(subscriber) {
+export function subscribe(subscriber) {
     changeDataCallback = subscriber
 }
 
