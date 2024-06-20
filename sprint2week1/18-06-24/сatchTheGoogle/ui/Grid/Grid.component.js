@@ -10,11 +10,11 @@ export function GridComponent() {
         const rowElement = document.createElement('tr')
 
         for (let x = 0; x < gridSize.width; x++) {
-
             // todo: move to CellComponent
             // const cellElement = CellComponent(x, y)
             const cellElement = document.createElement('td')
             if (googlePosition.x === x && googlePosition.y === y) {
+                // todo: const googleElement = Google()
                 cellElement.append('G')
             }
             // cellElement.append()

@@ -10,14 +10,14 @@ const _state = {
         pointsToLose: 30,
         pointsToWin: 5,
         gridSize: {
-            width: 4,
-            height: 4,
+            width: 2,
+            height: 2,
         }
     },
     positions: {
         googlePosition: {
-            x: 3,
-            y: 3
+            x: 0,
+            y: 0
         }
     }
 }
@@ -28,6 +28,22 @@ export function subscribe(subscriber) {
     _observer = subscriber
 }
 
+function _getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max))
+}
+
+function _moveGoogleToRandomPosition() {
+    const newX = _getRandomInt(_state.settings.gridSize.width)
+    const newY = _getRandomInt(_state.settings.gridSize.height)
+
+    if (newX === _state.positions.googlePosition.x && newY === _state.positions.googlePosition.y) {
+        _moveGoogleToRandomPosition()
+        return 
+    }
+    _state.positions.googlePosition.x = newX
+    _state.positions.googlePosition.y = newY
+}
+
 function _play() {
     let _intervalId = setInterval(() => {
         _state.points.miss++
@@ -35,8 +51,9 @@ function _play() {
     if (_state.points.miss === _state.settings.pointsToLose) {
         clearInterval(_intervalId)
         _state.gameStatus = GAME_STATUSES.LOSE
+    } else {
+        _moveGoogleToRandomPosition()
     }
-    
         _observer()
     }, 1000)
 }
