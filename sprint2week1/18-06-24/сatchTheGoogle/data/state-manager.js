@@ -44,8 +44,10 @@ function _moveGoogleToRandomPosition() {
     _state.positions.googlePosition.y = newY
 }
 
+let _intervalId
+
 function _play() {
-    let _intervalId = setInterval(() => {
+    _intervalId = setInterval(() => {
         _state.points.miss++
     
     if (_state.points.miss === _state.settings.pointsToLose) {
@@ -55,7 +57,7 @@ function _play() {
         _moveGoogleToRandomPosition()
     }
         _observer()
-    }, 1000)
+    }, 3000)
 }
 
 _play()
@@ -94,6 +96,19 @@ export function playAgain() {
     _state.points.miss = 0
     _play()
     _observer()
+}
+
+export function catchGoogle() {
+    _state.points.catch++
+    if (_state.points.catch === _state.settings.pointsToWin) {
+        clearInterval(_intervalId)
+        _state.gameStatus = GAME_STATUSES.WIN
+    } else {
+        _moveGoogleToRandomPosition()
+        clearInterval(_intervalId)
+        _play()
+    }
+        _observer()
 }
 
 
