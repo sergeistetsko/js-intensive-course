@@ -2,6 +2,7 @@ import { ResultPanelComponent } from './ResultPanel/ResultPanel.component.js'
 import { getGameStatus } from '../data/state-manager.js'
 import { GAME_STATUSES } from '../data/constans.js'
 import { LoseComponent } from './Lose/Lose.component.js'
+import { WinComponent } from './Win/Win.component.js'
 import { GridComponent } from './Grid/Grid.component.js'
 
 export function AppComponent() {
@@ -22,7 +23,10 @@ export function AppComponent() {
             element.append(loseElement)
         },
         [GAME_STATUSES.SETTINGS]: () => {console.warn('NOT IMPLEMENTED YET')},
-        [GAME_STATUSES.WIN]: () => {console.warn('NOT IMPLEMENTED YET')},
+        [GAME_STATUSES.WIN]: () => {
+            const winElement = WinComponent()
+            element.append(winElement)
+        },
     }
 
     transitions[status]()

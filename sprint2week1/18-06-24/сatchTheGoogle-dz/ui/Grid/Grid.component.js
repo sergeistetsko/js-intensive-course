@@ -22,13 +22,10 @@ export function GridComponent() {
                 })
                 cellElement.append(googleElement)
             }
-            // cellElement.append()
             rowElement.append(cellElement)
         }
         element.append(rowElement)
     }
-
-    // element.append(`Grid will be here`)
 
     return element
 }
