@@ -116,7 +116,7 @@ select {
 
 /* Result //======================================================================================================================================================== */
 
-/* .result-container {
+.result-container {
     display: flex;
     justify-content: space-between;
     padding: 12px 36px;
@@ -130,7 +130,7 @@ select {
 }
 
 .result-block {
-    display: inline-flex;
+    display: flex;
     gap: 24px;
     justify-content: space-between;
 }
@@ -143,7 +143,7 @@ select {
 .result {
     font-size: 24px;
     font-weight: 500;
-} */
+}
 
 /* Table //======================================================================================================================================================== */
 
@@ -155,11 +155,12 @@ select {
 
 /* Modal //======================================================================================================================================================== */
 
-/* .modal {
+.modal {
     margin: 0 auto;
     position: relative;
     max-width: 280px;
     max-height: 550px;
+
 }
 
 .modal-elements {
@@ -219,5 +220,11 @@ select {
     display: flex;
     flex-direction: column;
     gap: 24px;
-} */
+}
+
+.modal-result-block {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 24px;
+}
 

@@ -6,7 +6,7 @@ export function SettingsComponent() {
 
     const playNewGameButtonElement = document.createElement('button')
     playNewGameButtonElement.classList.add('button', 'main-button')
-    playNewGameButtonElement.append('START')
+    playNewGameButtonElement.append('START GAME')
     playNewGameButtonElement.addEventListener('click', () => {
         playAgain()
     })
