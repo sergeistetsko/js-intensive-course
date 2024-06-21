@@ -21,6 +21,5 @@ export function GridComponent() {
         }
         element.append(rowElement)
     }
-
     return element
 }

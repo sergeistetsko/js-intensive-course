@@ -7,11 +7,11 @@ const _state = {
         catch: 0,
     },
     settings: {
-        pointsToLose: 10,
-        pointsToWin: 10,
+        pointsToLose: 5,
+        pointsToWin: 20,
         gridSize: {
-            width: 5,
-            height: 5,
+            width: 4,
+            height: 4,
         }
     },
     positions: {
@@ -79,6 +79,14 @@ export function getPoints() {
 
 export function getGameStatus() {
     return _state.gameStatus
+}
+
+export function getPointsToWin() {
+    return _state.settings.pointsToWin
+}
+
+export function getPointsToLose() {
+    return _state.settings.pointsToLose
 }
 
 export function getGridSize() {
