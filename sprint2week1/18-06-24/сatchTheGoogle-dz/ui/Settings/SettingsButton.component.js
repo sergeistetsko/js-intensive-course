@@ -1,6 +1,7 @@
 import { playAgain } from '../../data/state-manager.js'
 
-export function SettingsComponent() {
+export function SettingsButtonComponent() {
+    
     const element = document.createElement('div')
     element.classList.add('main-elements')
 
@@ -11,7 +12,9 @@ export function SettingsComponent() {
         playAgain()
     })
 
-    element.append(playNewGameButtonElement)
+    element.append(
+        playNewGameButtonElement
+    )
 
     return element
 }

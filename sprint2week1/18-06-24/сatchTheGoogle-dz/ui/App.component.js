@@ -4,7 +4,8 @@ import { GAME_STATUSES } from '../data/constans.js'
 import { LoseComponent } from './Lose/Lose.component.js'
 import { WinComponent } from './Win/Win.component.js'
 import { GridComponent } from './Grid/Grid.component.js'
-import { SettingsComponent } from './Settings/Settings.component.js'
+import { SettingsLineComponent } from './Settings/SettingsLine.component.js'
+import { SettingsButtonComponent } from './Settings/SettingsButton.component.js'
 
 export function AppComponent() {
     const element = document.createElement('div')
@@ -14,19 +15,26 @@ export function AppComponent() {
 
     const transitions = {
         [GAME_STATUSES.IN_PROGRESS]: () => {
+            const settingsLineElement = SettingsLineComponent()
             const resultPanelElement = ResultPanelComponent()
-            element.append(resultPanelElement)
-
             const gridElement = GridComponent()
-            element.append(gridElement)
+            element.append(
+                settingsLineElement,
+                resultPanelElement,
+                gridElement
+            )
         },
         [GAME_STATUSES.LOSE]: () => {
             const loseElement = LoseComponent()
             element.append(loseElement)
         },
         [GAME_STATUSES.SETTINGS]: () => {            
-            const settingsElement = SettingsComponent()
-            element.append(settingsElement)
+            const settingsLineElement = SettingsLineComponent()
+            const settingsButtonElement = SettingsButtonComponent()
+            element.append(
+                settingsLineElement,
+                settingsButtonElement
+            )
         },
         [GAME_STATUSES.WIN]: () => {
             const winElement = WinComponent()
