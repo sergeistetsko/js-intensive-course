@@ -5,14 +5,17 @@
 
 /* Page //======================================================================================================================================================== */
 
-.container {
+#root {
     margin: 0 auto;
     max-width: 1182px;
     padding: 0 15px;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.main-elements {
+/* .main-elements {
     display: flex;
     flex-direction: column;
 }
@@ -47,11 +50,11 @@ select {
     border-radius: 5px;
     padding: 6px 12px;
     cursor: pointer;
-}
+} */
 
 /* Toggle //======================================================================================================================================================== */
 
-.switch-button {
+/* .switch-button {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -106,14 +109,14 @@ select {
 
 .toggle.on .icon-slider:after {
     background-image: url('../img/icons/soundOnIcon.svg');
-}
+} */
 
 /* Toggle //======================================================================================================================================================== */
 
 
 /* Result //======================================================================================================================================================== */
 
-.result-container {
+/* .result-container {
     display: flex;
     justify-content: space-between;
     padding: 12px 36px;
@@ -140,22 +143,19 @@ select {
 .result {
     font-size: 24px;
     font-weight: 500;
-}
+} */
 
 /* Table //======================================================================================================================================================== */
 
 .table {
     border-collapse: separate;
     border-spacing: 12px 6px;
-    table-layout:fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    table-layout: fixed;
 }
 
 /* Modal //======================================================================================================================================================== */
 
-.modal {
+/* .modal {
     margin: 0 auto;
     position: relative;
     max-width: 280px;
@@ -219,5 +219,5 @@ select {
     display: flex;
     flex-direction: column;
     gap: 24px;
-}
+} */
 

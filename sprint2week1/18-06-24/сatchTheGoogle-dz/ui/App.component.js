@@ -8,6 +8,7 @@ import { SettingsComponent } from './Settings/Settings.component.js'
 
 export function AppComponent() {
     const element = document.createElement('div')
+    element.classList.add('container')
 
     const status = getGameStatus()
 
