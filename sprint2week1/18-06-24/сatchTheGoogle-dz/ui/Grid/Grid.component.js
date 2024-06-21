@@ -1,4 +1,5 @@
-import { catchGoogle, getGooglePosition, getGridSize } from '../../data/state-manager.js'
+import { getGooglePosition, getGridSize } from '../../data/state-manager.js'
+import { GoogleComponent } from './Google/Google.component.js'
 
 export function GridComponent() {
     const element = document.createElement('table')
@@ -10,17 +11,9 @@ export function GridComponent() {
         const rowElement = document.createElement('tr')
 
         for (let x = 0; x < gridSize.width; x++) {
-            // todo: move to CellComponent
-            // const cellElement = CellComponent(x, y)
             const cellElement = document.createElement('td')
             if (googlePosition.x === x && googlePosition.y === y) {
-                // todo: const googleElement = Google()
-                const googleElement = document.createElement('span')
-                googleElement.append(' G ')
-                googleElement.addEventListener('click', () => {
-                    catchGoogle()
-                })
-                cellElement.append(googleElement)
+                cellElement.append(GoogleComponent())
             }
             rowElement.append(cellElement)
         }
