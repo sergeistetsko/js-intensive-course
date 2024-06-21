@@ -4,6 +4,7 @@ import { GAME_STATUSES } from '../data/constans.js'
 import { LoseComponent } from './Lose/Lose.component.js'
 import { WinComponent } from './Win/Win.component.js'
 import { GridComponent } from './Grid/Grid.component.js'
+import { SettingsComponent } from './Settings/Settings.component.js'
 
 export function AppComponent() {
     const element = document.createElement('div')
@@ -22,7 +23,10 @@ export function AppComponent() {
             const loseElement = LoseComponent()
             element.append(loseElement)
         },
-        [GAME_STATUSES.SETTINGS]: () => {console.warn('NOT IMPLEMENTED YET')},
+        [GAME_STATUSES.SETTINGS]: () => {            
+            const settingsElement = SettingsComponent()
+            element.append(settingsElement)
+        },
         [GAME_STATUSES.WIN]: () => {
             const winElement = WinComponent()
             element.append(winElement)

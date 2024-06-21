@@ -1,14 +1,14 @@
 import { GAME_STATUSES } from './constans.js'
 
 const _state = {
-    gameStatus: GAME_STATUSES.IN_PROGRESS,
+    gameStatus: GAME_STATUSES.SETTINGS,
     points: {
         miss: 0,
         catch: 0,
     },
     settings: {
-        pointsToLose: 30,
-        pointsToWin: 5,
+        pointsToLose: 10,
+        pointsToWin: 10,
         gridSize: {
             width: 5,
             height: 5,
@@ -33,23 +33,29 @@ function _getRandomInt(max) {
 }
 
 function _moveGoogleToRandomPosition() {
-    const newX = _getRandomInt(_state.settings.gridSize.width)
-    const newY = _getRandomInt(_state.settings.gridSize.height)
+    const maxAttempts = 10
+    let attempts = 0
 
-    if (newX === _state.positions.googlePosition.x && newY === _state.positions.googlePosition.y) {
-        _moveGoogleToRandomPosition()
-        return 
+    while (attempts < maxAttempts) {
+        const newX = _getRandomInt(_state.settings.gridSize.width)
+        const newY = _getRandomInt(_state.settings.gridSize.height)
+
+        if (newX !== _state.positions.googlePosition.x || newY !== _state.positions.googlePosition.y) {
+            _state.positions.googlePosition.x = newX
+            _state.positions.googlePosition.y = newY
+            return
+        }
+        attempts++
     }
-    _state.positions.googlePosition.x = newX
-    _state.positions.googlePosition.y = newY
 }
 
 let _intervalId
 
 function _play() {
     _intervalId = setInterval(() => {
+    if (_state.gameStatus === GAME_STATUSES.IN_PROGRESS) {
         _state.points.miss++
-    
+    } 
     if (_state.points.miss === _state.settings.pointsToLose) {
         clearInterval(_intervalId)
         _state.gameStatus = GAME_STATUSES.LOSE
@@ -57,7 +63,7 @@ function _play() {
         _moveGoogleToRandomPosition()
     }
         _observer()
-    }, 2000)
+    }, 3000)
 }
 
 _play()
