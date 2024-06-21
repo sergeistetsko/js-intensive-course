@@ -1,4 +1,4 @@
-import { getPoints, playAgain } from '../../data/state-manager.js'
+import { playAgain } from '../../data/state-manager.js'
 
 export function SettingsComponent() {
     const element = document.createElement('div')
