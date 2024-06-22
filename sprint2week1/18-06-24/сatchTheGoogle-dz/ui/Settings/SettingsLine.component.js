@@ -3,9 +3,9 @@ export function SettingsLineComponent() {
     const topItems = document.createElement('div')
     topItems.classList.add('top-items')
 
-    const gridSizeLine = createLine('Grid size', ['4x4', '5x5', '6x6', '7x7', '8x8'], '01')
-    const pointsToWinLine = createLine('Points to win', ['20 pts', '40 pts', '50 pts', '60 pts', '80 pts'], '02')
-    const pointsToLoseLine = createLine('Points to lose', ['5 pts', '10 pts', '15 pts', '20 pts', '25 pts'], '03')
+    const gridSizeLine = createLine('Grid size', ['4x4', '5x5', '6x6', '7x7', '8x8'], '1')
+    const pointsToWinLine = createLine('Points to win', ['20 pts', '40 pts', '50 pts', '60 pts', '80 pts'], '2')
+    const pointsToLoseLine = createLine('Points to lose', ['5 pts', '10 pts', '15 pts', '20 pts', '25 pts'], '3')
 
     const switchButton = document.createElement('div')
     switchButton.classList.add('switch-button')

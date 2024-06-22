@@ -22,6 +22,7 @@ const _state = {
     }
 }
 
+
 let _observer = () => {}
 
 export function subscribe(subscriber) {
@@ -116,5 +117,31 @@ export function catchGoogle() {
     }
         _observer()
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const select1 = document.getElementById('1')
+    const select2 = document.getElementById('2')
+    const select3 = document.getElementById('3')
+  
+    select1.addEventListener('change', () => {
+      const selectedValue1 = select1.value.slice(0, 1)
+      console.log(selectedValue1)
+      _state.settings.gridSize.height = selectedValue1
+      _state.settings.gridSize.width = selectedValue1
+    })
+  
+    select2.addEventListener('change', () => {
+      const selectedValue2 = select2.value.slice(0, 2)
+      console.log(selectedValue2)
+      _state.settings.gridSize.pointsToWin = selectedValue2
+    })
+  
+    select3.addEventListener('change', () => {
+      const selectedValue3 = select3.value.slice(0, 2).trim()
+      console.log(selectedValue3)
+      _state.settings.gridSize.pointsToLose = selectedValue3
+    })
+  })
+  
 
 
