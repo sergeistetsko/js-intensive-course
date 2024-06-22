@@ -1,3 +1,5 @@
+import { setGridSize, setPointsToWin, setPointsToLose } from '../../data/state-manager.js'
+
 export function SettingsLineComponent() {
     
     const topItems = document.createElement('div')
@@ -49,17 +51,27 @@ export function SettingsLineComponent() {
         select.name = 'select'
         select.id = index
 
+        if (index === '1') {
+            select.addEventListener('change', () => {
+                const selectedOption = select.value
+                setGridSize(selectedOption)
+            })
+        } else if (index === '2') {
+            select.addEventListener('change', () => {
+                const selectedOption = select.value
+                setPointsToWin(selectedOption)
+            })
+        } else {
+            select.addEventListener('change', () => {
+                const selectedOption = select.value
+                setPointsToLose(selectedOption)
+            })
+        }
+
         options.forEach(optionText => {
             const option = document.createElement('option')
-            if (index === '01') {
-                option.value = optionText.slice(0,1)
-            } else if (index === '02') {
-                option.value = optionText.slice(0,2)
-            } else if (index === '03') {
-                option.value = optionText.slice(0,2).trim()
-            }
+            option.value = optionText
             option.textContent = optionText
-
             select.append(option)
         })
 
