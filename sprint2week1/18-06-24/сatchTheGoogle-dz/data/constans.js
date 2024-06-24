@@ -26,11 +26,13 @@ export const GAME_SETTINGS = {
 export const GAME_MESSAGES = {
     WIN: {
         TITLE: 'You win!',
+        TEXT: 'Congratulations',
         ICON: './img/icons/winnerIcon.svg',
         MESSAGE: 'You\'re awesome!'
     },
     LOSE: {
         TITLE: 'You lose!',
+        TEXT: 'You\'ll be lucky next time',
         ICON: './img/icons/lossIcon.svg',
         MESSAGE: 'You\'ll be lucky next time'
     }
