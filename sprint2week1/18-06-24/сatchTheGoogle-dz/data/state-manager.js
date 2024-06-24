@@ -53,9 +53,7 @@ let _intervalId
 
 function _play() {
     _intervalId = setInterval(() => {
-    if (_state.gameStatus === GAME_STATUSES.IN_PROGRESS) {
         _state.points.miss++
-    } 
     if (_state.points.miss === _state.settings.pointsToLose) {
         clearInterval(_intervalId)
         _state.gameStatus = GAME_STATUSES.LOSE
@@ -65,8 +63,6 @@ function _play() {
         _observer()
     }, 3000)
 }
-
-_play()
 
 // getter/selector/query/CQS/mapper
 
@@ -96,6 +92,7 @@ export function getGooglePosition() {
 }
 
 // setter/command/mutation/side-effect
+
 export function playAgain() {
     _state.gameStatus = GAME_STATUSES.IN_PROGRESS
     _state.points.catch = 0
@@ -126,6 +123,7 @@ export function setGridSize(value) {
 export function setPointsToWin(value) {
     _state.settings.pointsToWin = parseInt(value.replace(/\D/g, ''))
 }
+
 export function setPointsToLose(value) {
     _state.settings.pointsToLose = parseInt(value.replace(/\D/g, ''))
 }

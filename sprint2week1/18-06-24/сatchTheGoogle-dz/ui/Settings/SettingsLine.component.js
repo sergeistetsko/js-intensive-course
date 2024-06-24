@@ -1,87 +1,88 @@
 import { setGridSize, setPointsToWin, setPointsToLose } from '../../data/state-manager.js'
+import { GAME_SETTINGS } from '../../data/constans.js'
 
 export function SettingsLineComponent() {
     
-    const topItems = document.createElement('div')
-    topItems.classList.add('top-items')
+    const topItemsElement = document.createElement('div')
+    topItemsElement.classList.add('top-items')
 
-    const gridSizeLine = createLine('Grid size', ['4x4', '5x5', '6x6', '7x7', '8x8'], '1')
-    const pointsToWinLine = createLine('Points to win', ['20 pts', '40 pts', '50 pts', '60 pts', '80 pts'], '2')
-    const pointsToLoseLine = createLine('Points to lose', ['5 pts', '10 pts', '15 pts', '20 pts', '25 pts'], '3')
+    const gridSizeLineElement = createLineElement(GAME_SETTINGS.GRID.TITLE, GAME_SETTINGS.GRID.SIZE, GAME_SETTINGS.GRID.ID)
+    const pointsToWinLineElement = createLineElement(GAME_SETTINGS.POINTS_TO_WIN.TITLE, GAME_SETTINGS.POINTS_TO_WIN.VALUES, GAME_SETTINGS.POINTS_TO_WIN.ID)
+    const pointsToLoseLineElement = createLineElement(GAME_SETTINGS.POINTS_TO_LOSE.TITLE, GAME_SETTINGS.POINTS_TO_LOSE.VALUES, GAME_SETTINGS.POINTS_TO_LOSE.ID)
 
-    const switchButton = document.createElement('div')
-    switchButton.classList.add('switch-button')
+    const switchButtonElement = document.createElement('div')
+    switchButtonElement.classList.add('switch-button')
 
-    const soundLabel = document.createElement('label')
-    soundLabel.textContent = 'Sound on'
+    const soundLabelElement = document.createElement('label')
+    soundLabelElement.textContent = 'Sound on'
 
-    const toggleButton = document.createElement('button')
-    toggleButton.classList.add('toggle', 'on')
-    toggleButton.addEventListener('click', () => {
-        toggleButton.classList.remove('on')
+    const toggleButtonElement = document.createElement('button')
+    toggleButtonElement.classList.add('toggle', 'on')
+    toggleButtonElement.addEventListener('click', () => {
+        toggleButtonElement.classList.remove('on')
     })
 
-    const iconSlider = document.createElement('span')
-    iconSlider.classList.add('icon-slider')
+    const iconSliderElement = document.createElement('span')
+    iconSliderElement.classList.add('icon-slider')
 
-    toggleButton.append(iconSlider)
+    toggleButtonElement.append(iconSliderElement)
 
-    switchButton.append(
-        soundLabel,
-        toggleButton
+    switchButtonElement.append(
+        soundLabelElement,
+        toggleButtonElement
     )
 
-    topItems.append(
-        gridSizeLine,
-        pointsToWinLine,
-        pointsToLoseLine,
-        switchButton
+    topItemsElement.append(
+        gridSizeLineElement,
+        pointsToWinLineElement,
+        pointsToLoseLineElement,
+        switchButtonElement
     )
 
-    function createLine(labelText, options, index) {
-        const line = document.createElement('div')
-        line.className = 'line'
+    function createLineElement(labelText, options, index) {
+        const lineElement = document.createElement('div')
+        lineElement.classList.add('line')
 
-        const label = document.createElement('label')
-        label.textContent = labelText
+        const labelElement = document.createElement('label')
+        labelElement.textContent = labelText
         
-        label.setAttribute('for', index)
+        labelElement.setAttribute('for', index)
 
-        const select = document.createElement('select')
-        select.name = 'select'
-        select.id = index
+        const selectElement = document.createElement('select')
+        selectElement.name = 'select'
+        selectElement.id = index
 
         if (index === '1') {
-            select.addEventListener('change', () => {
-                const selectedOption = select.value
+            selectElement.addEventListener('change', () => {
+                const selectedOption = selectElement.value
                 setGridSize(selectedOption)
             })
         } else if (index === '2') {
-            select.addEventListener('change', () => {
-                const selectedOption = select.value
+            selectElement.addEventListener('change', () => {
+                const selectedOption = selectElement.value
                 setPointsToWin(selectedOption)
             })
         } else {
-            select.addEventListener('change', () => {
-                const selectedOption = select.value
+            selectElement.addEventListener('change', () => {
+                const selectedOption = selectElement.value
                 setPointsToLose(selectedOption)
             })
         }
 
         options.forEach(optionText => {
-            const option = document.createElement('option')
-            option.value = optionText
-            option.textContent = optionText
-            select.append(option)
+            const optionElement = document.createElement('option')
+            optionElement.value = optionText
+            optionElement.textContent = optionText
+            selectElement.append(optionElement)
         })
 
-        line.append(
-            label,
-            select
+        lineElement.append(
+            labelElement,
+            selectElement
         )
-        return line
+        return lineElement
     }
 
-    return topItems
+    return topItemsElement
 }
 
