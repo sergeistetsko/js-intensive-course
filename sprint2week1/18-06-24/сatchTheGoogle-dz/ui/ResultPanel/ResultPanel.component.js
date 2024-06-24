@@ -1,47 +1,42 @@
 import { getPoints } from '../../data/state-manager.js'
 
 export function ResultPanelComponent() {
-    const parentElement = document.createElement('div')
-    parentElement.classList.add('result-container')
-
+    const resultContainer = createDivElement('result-container')
     const points = getPoints()
 
-    const childElement1 = document.createElement('div')
-    childElement1.classList.add('result-block')
+    const catchResultBlock = createDivElement('result-block')
+    const catchTitle = createSpanElement('result-title', 'Catch: ')
+    const catchResult = createSpanElement('result', `${points.catch}`)
 
-    const titleElement1 = document.createElement('span')
-    titleElement1.classList.add('result-title')
-    titleElement1.innerText = 'Catch: '
+    const missResultBlock = createDivElement('result-block')
+    const missTitle = createSpanElement('result-title', 'Miss: ')
+    const missResult = createSpanElement('result', `${points.miss}`)
 
-    const valueElement1 = document.createElement('span')
-    valueElement1.classList.add('result')
-    valueElement1.innerText = `${points.catch}`
+    resultContainer.append(
+        catchResultBlock,
+        missResultBlock
+        )
+    catchResultBlock.append(
+        catchTitle,
+        catchResult
+        )
+    missResultBlock.append(
+        missTitle,
+        missResult
+        )
 
-    parentElement.append(
-        childElement1
-    )
-    childElement1.append(
-        titleElement1,
-        valueElement1
-    )
-    const childElement2 = document.createElement('div')
-    childElement2.classList.add('result-block')
+    return resultContainer
+}
 
-    const titleElement2 = document.createElement('span')
-    titleElement2.classList.add('result-title')
-    titleElement2.innerText = 'Miss: '
+function createDivElement(className) {
+    const divElement = document.createElement('div');
+    divElement.classList.add(className);
+    return divElement;
+}
 
-    const valueElement2 = document.createElement('span')
-    valueElement2.classList.add('result')
-    valueElement2.innerText = `${points.miss}`
-
-    parentElement.append(
-        childElement2
-    )
-    childElement2.append(
-        titleElement2,
-        valueElement2
-    )
-
-    return parentElement
+function createSpanElement(className, text) {
+    const spanElement = document.createElement('span');
+    spanElement.classList.add(className);
+    spanElement.innerText = text;
+    return spanElement;
 }
