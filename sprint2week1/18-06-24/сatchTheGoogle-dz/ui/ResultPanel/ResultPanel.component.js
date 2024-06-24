@@ -1,4 +1,5 @@
 import { getPoints } from '../../data/state-manager.js'
+import { createDivElement, createSpanElement } from '../Common/common.js'
 
 export function ResultPanelComponent() {
     const resultContainer = createDivElement('result-container')
@@ -26,17 +27,4 @@ export function ResultPanelComponent() {
         )
 
     return resultContainer
-}
-
-function createDivElement(className) {
-    const divElement = document.createElement('div');
-    divElement.classList.add(className);
-    return divElement;
-}
-
-function createSpanElement(className, text) {
-    const spanElement = document.createElement('span');
-    spanElement.classList.add(className);
-    spanElement.innerText = text;
-    return spanElement;
 }
