@@ -28,7 +28,7 @@ export function WinComponent() {
 
     const playAgainButton = document.createElement('button')
     playAgainButton.classList.add('button')
-    playAgainButton.append('Play again');
+    playAgainButton.append('Play again')
     playAgainButton.addEventListener('click', playAgain)
 
     modalContainer.append(
