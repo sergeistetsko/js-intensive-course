@@ -32,12 +32,14 @@ function _getRandomInt(max) {
 function _moveGoogleToRandomPosition() {
     const newX = _getRandomInt(_state.settings.gridSize)
     const newY = _getRandomInt(_state.settings.gridSize)
-  
+
     if (newX === _state.positions.googlePosition.x && newY === _state.positions.googlePosition.y) {
-      _moveGoogleToRandomPosition()
-  
-      return
+        _moveGoogleToRandomPosition()
+        return
     }
+
+    _state.positions.googlePosition.x = newX
+    _state.positions.googlePosition.y = newY
 }
 
 let _intervalId

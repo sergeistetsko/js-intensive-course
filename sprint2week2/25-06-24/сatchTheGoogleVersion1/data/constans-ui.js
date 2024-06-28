@@ -1,6 +1,6 @@
 export const GAME_SETTINGS = {
     GRID: {
-        ID: '1',
+        ID: 'grid-size',
         TITLE: 'Grid size',
         SIZE: [
             { value: '4', innerText: '4x4' },
@@ -11,7 +11,7 @@ export const GAME_SETTINGS = {
         ]
     },
     POINTS_TO_WIN: {
-        ID: '2',
+        ID: 'points-to-win',
         TITLE: 'Points to win',
         VALUES: [
             { value: '20', innerText: '20 pts' },
@@ -23,7 +23,7 @@ export const GAME_SETTINGS = {
     },
     POINTS_TO_LOSE: {
         ID: '3',
-        TITLE: 'Points to lose',
+        TITLE: 'points-to-lose',
         VALUES: [
             { value: '5', innerText: '5 pts' },
             { value: '10', innerText: '10 pts' },
