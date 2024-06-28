@@ -27,5 +27,7 @@ export function createLineElement(innerText, options, id, selectedValue, onChang
     })
 
     lineElement.append(labelElement, selectElement)
-    return lineElement
+
+    return [lineElement, selectElement]
 }
+

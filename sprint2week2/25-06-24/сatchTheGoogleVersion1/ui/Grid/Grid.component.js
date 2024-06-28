@@ -9,10 +9,10 @@ export function GridComponent() {
 
     const googlePosition = getGooglePosition()
 
-    for (let y = 0; y < gridSize; y++) {
+    for (let y = 0; y < gridSize.y; y++) {
         const rowElement = document.createElement('tr')
 
-        for (let x = 0; x < gridSize; x++) {
+        for (let x = 0; x < gridSize.x; x++) {
             const cellElement = createNewElement('td', { class: 'cell'})
 
             if (googlePosition.x === x && googlePosition.y === y) {

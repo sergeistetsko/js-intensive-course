@@ -26,7 +26,7 @@ export function subscribe(subscriber) {
 }
 
 function _getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max))
+    return Math.floor(Math.random() * max)
 }
 
 function _moveGoogleToRandomPosition() {
@@ -71,7 +71,10 @@ export function getGameStatus() {
 }
 
 export function getGridSize() {
-    return _state.settings.gridSize
+    return { 
+        x: _state.settings.gridSize,
+        y: _state.settings.gridSize
+    }
 }
 
 export function getGooglePosition() {

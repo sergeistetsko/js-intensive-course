@@ -7,20 +7,25 @@ export function SettingsLineComponent() {
 
     const { gridSize, pointsToWin, pointsToLose } = getSettings()
 
-    const handleSettingChangeGrid = function() {
-        return setGridSize(parseInt(gridSizeLineElement.value))
-    }
-    const handleSettingChangePointsToWin = function() {
-        return setPointsToWin(parseInt(pointsToWinLineElement.value))
-    }
-    const handleSettingChangePointsToLose = function() {
-        return setPointsToLose(parseInt(pointsToLoseLineElement.value))
+    function handleSettingChangeGrid() {
+        const newValue = parseInt(select1Element.value)
+        setGridSize(newValue)
     }
     
-    const gridSizeLineElement = createLineElement(GAME_SETTINGS.GRID.TITLE, GAME_SETTINGS.GRID.SIZE, GAME_SETTINGS.GRID.ID, gridSize, handleSettingChangeGrid)
-    const pointsToWinLineElement = createLineElement(GAME_SETTINGS.POINTS_TO_WIN.TITLE, GAME_SETTINGS.POINTS_TO_WIN.VALUES, GAME_SETTINGS.POINTS_TO_WIN.ID, pointsToWin, handleSettingChangePointsToWin)
-    const pointsToLoseLineElement = createLineElement(GAME_SETTINGS.POINTS_TO_LOSE.TITLE, GAME_SETTINGS.POINTS_TO_LOSE.VALUES, GAME_SETTINGS.POINTS_TO_LOSE.ID, pointsToLose, handleSettingChangePointsToLose)
+    function handleSettingChangePointsToWin() {
+        const newValue = parseInt(select2Element.value)
+        setPointsToWin(newValue)
+    }
     
+    function handleSettingChangePointsToLose() {
+        const newValue = parseInt(select3Element.value)
+        setPointsToLose(newValue)
+    }
+
+    const [gridSizeLineElement, select1Element] = createLineElement(GAME_SETTINGS.GRID.TITLE, GAME_SETTINGS.GRID.SIZE, GAME_SETTINGS.GRID.ID, gridSize, handleSettingChangeGrid)
+    const [pointsToWinLineElement, select2Element] = createLineElement(GAME_SETTINGS.POINTS_TO_WIN.TITLE, GAME_SETTINGS.POINTS_TO_WIN.VALUES, GAME_SETTINGS.POINTS_TO_WIN.ID, pointsToWin, handleSettingChangePointsToWin)
+    const [pointsToLoseLineElement, select3Element] = createLineElement(GAME_SETTINGS.POINTS_TO_LOSE.TITLE, GAME_SETTINGS.POINTS_TO_LOSE.VALUES, GAME_SETTINGS.POINTS_TO_LOSE.ID, pointsToLose, handleSettingChangePointsToLose)
+
     const switchButtonElement = createNewElement('div', { class: 'switch-button'})
     const soundLabelElement = createNewElement('label', { class: 'label', innerText: 'Sound on'})
     const toggleButtonElement = createNewElement('button', { class: 'toggle on'})
