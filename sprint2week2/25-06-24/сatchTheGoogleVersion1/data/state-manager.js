@@ -9,7 +9,7 @@ const _state = {
     settings: {
         pointsToLose: 5,
         pointsToWin: 20,
-        gridSize: 4
+        gridSize: 4,
     },
     positions: {
         googlePosition: {
@@ -120,9 +120,13 @@ export function catchGoogle() {
         _observer()
 }
 
-export function setSettings(gridSize, pointsToWin, pointsToLose) {
+export function setGridSize(gridSize) {
     _state.settings.gridSize = gridSize
+  }
+export function setPointsToWin(pointsToWin) {
     _state.settings.pointsToWin = pointsToWin
+  }
+export function setPointsToLose(pointsToLose) {
     _state.settings.pointsToLose = pointsToLose
   }
     
