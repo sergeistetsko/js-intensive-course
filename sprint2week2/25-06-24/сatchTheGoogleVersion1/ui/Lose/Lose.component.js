@@ -1,12 +1,14 @@
 import { getPoints, playAgain } from '../../data/state-manager.js'
 import { GAME_MESSAGES } from '../../data/constans.js'
-import { createDivElement, createSpanElement } from '../Common/common.js'
+
 
 export function LoseComponent() {
     const modalContainer = createDivElement('modal')
+
     const points = getPoints()
 
     const decoration = createDivElement('modal-decoration')
+    
     const iconImage = document.createElement('img')
     iconImage.src = GAME_MESSAGES.LOSE.ICON
     iconImage.alt = 'icon'
@@ -32,25 +34,18 @@ export function LoseComponent() {
     playAgainButton.addEventListener('click', playAgain)
 
     modalContainer.append(
-        decoration,
-        elementsContainer
+        decoration, elementsContainer
         )
     decoration.append(iconImage)
     elementsContainer.append(
-        title,
-        text,
-        catchResultBlock,
-        missResultBlock,
-        playAgainButton
+        title, text, catchResultBlock, missResultBlock, playAgainButton
     )
 
     catchResultBlock.append(
-        catchTitle,
-        catchResult
+        catchTitle, catchResult
         )
     missResultBlock.append(
-        missTitle,
-        missResult
+        missTitle, missResult
         )
 
     return modalContainer

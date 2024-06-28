@@ -1,29 +1,27 @@
 import { getPoints } from '../../data/state-manager.js'
-import { createDivElement, createSpanElement } from '../Common/common.js'
+import { createNewElement } from '../Utilities/Utilities.js'
 
 export function ResultPanelComponent() {
-    const resultContainer = createDivElement('result-container')
+    const resultContainer = createNewElement('div', { class: 'result-container'})
+
     const points = getPoints()
 
-    const catchResultBlock = createDivElement('result-block')
-    const catchTitle = createSpanElement('result-title', 'Catch: ')
-    const catchResult = createSpanElement('result', `${points.catch}`)
-
-    const missResultBlock = createDivElement('result-block')
-    const missTitle = createSpanElement('result-title', 'Miss: ')
-    const missResult = createSpanElement('result', `${points.miss}`)
+    const catchResultBlock = createNewElement('div', { class: 'result-block'})    
+    const catchTitle = createNewElement('span', { class: 'result-title', innerText: 'Catch: '}) 
+    const catchResult = createNewElement('span', { class: 'result', innerText: `${points.catch}`}) 
+    
+    const missResultBlock = createNewElement('div', { class: 'result-block'})    
+    const missTitle = createNewElement('span', { class: 'result-title', innerText: 'Miss: '}) 
+    const missResult = createNewElement('span', { class: 'result', innerText: `${points.miss}`}) 
 
     resultContainer.append(
-        catchResultBlock,
-        missResultBlock
+        catchResultBlock, missResultBlock
         )
     catchResultBlock.append(
-        catchTitle,
-        catchResult
+        catchTitle, catchResult
         )
     missResultBlock.append(
-        missTitle,
-        missResult
+        missTitle, missResult
         )
 
     return resultContainer

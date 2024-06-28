@@ -9,10 +9,7 @@ const _state = {
     settings: {
         pointsToLose: 5,
         pointsToWin: 20,
-        gridSize: {
-            width: 4,
-            height: 4
-        }
+        gridSize: 4
     },
     positions: {
         googlePosition: {
@@ -37,8 +34,8 @@ function _moveGoogleToRandomPosition() {
     let attempts = 0
 
     while (attempts < maxAttempts) {
-        const newX = _getRandomInt(_state.settings.gridSize.width)
-        const newY = _getRandomInt(_state.settings.gridSize.height)
+        const newX = _getRandomInt(_state.settings.gridSize)
+        const newY = newX
 
         if (newX !== _state.positions.googlePosition.x || newY !== _state.positions.googlePosition.y) {
             _state.positions.googlePosition.x = newX
@@ -61,7 +58,7 @@ function _play() {
         _moveGoogleToRandomPosition()
     }
         _observer()
-    }, 3000)
+    }, 2000)
 }
 
 // getter/selector/query/CQS/mapper
@@ -79,8 +76,8 @@ export function getGameStatus() {
 
 export function getGridSize() {
     return { 
-        height: _state.settings.gridSize.height,
-        width: _state.settings.gridSize.width,
+        height: _state.settings.gridSize,
+        width: _state.settings.gridSize,
     }
 }
 
@@ -91,7 +88,21 @@ export function getGooglePosition() {
     }
 }
 
+export function getSettings() {
+    return {
+      gridSize: _state.settings.gridSize,
+      pointsToWin: _state.settings.pointsToWin,
+      pointsToLose: _state.settings.pointsToLose,
+    }
+  }
+
 // setter/command/mutation/side-effect
+
+export function startGame() {
+    _state.gameStatus = GAME_STATUSES.IN_PROGRESS
+    _play()
+    _observer()
+  }
 
 export function playAgain() {
     _state.gameStatus = GAME_STATUSES.IN_PROGRESS
@@ -114,19 +125,33 @@ export function catchGoogle() {
         _observer()
 }
 
-export function setGridSize(value) {
-    const [width, height] = value.split('x').map(Number)
+export function setGridSize(gridSize) {
+    const [width, height] = gridSize
     _state.settings.gridSize.width = width
     _state.settings.gridSize.height = height
 }
 
-export function setPointsToWin(value) {
-    _state.settings.pointsToWin = parseInt(value.replace(/\D/g, ''))
+export function setPointsToWin(pointsToWin) {
+    _state.settings.pointsToWin = pointsToWin
 }
 
-export function setPointsToLose(value) {
-    _state.settings.pointsToLose = parseInt(value.replace(/\D/g, ''))
+export function setPointsToLose(pointsToLose) {
+    _state.settings.pointsToLose = pointsToLose
 }
+// export function setGridSize(gridSize) {
+//     const [width, height] = gridSize.split('x').map(Number)
+//     _state.settings.gridSize.width = width
+//     _state.settings.gridSize.height = height
+// }
+
+// export function setPointsToWin(pointsToWin) {
+//     _state.settings.pointsToWin = parseInt(pointsToWin.replace(/\D/g, ''))
+// }
+
+// export function setPointsToLose(pointsToLose) {
+//     _state.settings.pointsToLose = parseInt(pointsToLose.replace(/\D/g, ''))
+// }
+
 
     
 

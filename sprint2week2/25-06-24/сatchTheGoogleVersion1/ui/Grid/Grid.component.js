@@ -1,25 +1,25 @@
 import { getGooglePosition, getGridSize } from '../../data/state-manager.js'
 import { GoogleComponent } from './Google/Google.component.js'
+import { createNewElement} from '../Utilities/Utilities.js'
 
 export function GridComponent() {
-    const element = document.createElement('table')
-    element.classList.add('table')
+    const tableElement = createNewElement('table', { class: 'table'})
 
     const gridSize = getGridSize()
     const googlePosition = getGooglePosition()
 
-    for (let y = 0; y < gridSize.height; y++) {
+    for (let y = 0; y < gridSize; y++) {
         const rowElement = document.createElement('tr')
 
-        for (let x = 0; x < gridSize.width; x++) {
-            const cellElement = document.createElement('td')
-            cellElement.classList.add('cell')
+        for (let x = 0; x < gridSize; x++) {
+            const cellElement = createNewElement('td', { class: 'cell'})
+
             if (googlePosition.x === x && googlePosition.y === y) {
                 cellElement.append(GoogleComponent())
             }
             rowElement.append(cellElement)
         }
-        element.append(rowElement)
+        tableElement.append(rowElement)
     }
-    return element
+    return tableElement
 }

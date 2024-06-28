@@ -1,48 +1,40 @@
-import { ResultPanelComponent } from './ResultPanel/ResultPanel.component.js'
-import { getGameStatus } from '../data/state-manager.js'
 import { GAME_STATUSES } from '../data/constans.js'
-import { LoseComponent } from './Lose/Lose.component.js'
-import { WinComponent } from './Win/Win.component.js'
-import { GridComponent } from './Grid/Grid.component.js'
+import { getGameStatus } from '../data/state-manager.js'
+
+import { ResultPanelComponent } from './ResultPanel/ResultPanel.component.js'
 import { SettingsLineComponent } from './Settings/SettingsLine.component.js'
 import { SettingsButtonComponent } from './Settings/SettingsButton.component.js'
+import { GridComponent } from './Grid/Grid.component.js'
+import { LoseComponent } from './Lose/Lose.component.js'
+import { WinComponent } from './Win/Win.component.js'
+
+import { createNewElement } from './Utilities/Utilities.js'
 
 export function AppComponent() {
-    const element = document.createElement('div')
-    element.classList.add('container')
+    const sectionElement = createNewElement('section', { class: 'container'})    
 
     const status = getGameStatus()
 
     const transitions = {
         [GAME_STATUSES.IN_PROGRESS]: () => {
-            const settingsLineElement = SettingsLineComponent()
-            const resultPanelElement = ResultPanelComponent()
-            const gridElement = GridComponent()
-            element.append(
-                settingsLineElement,
-                resultPanelElement,
-                gridElement
+            sectionElement.append(
+                SettingsLineComponent(), ResultPanelComponent(), GridComponent()
             )
         },
         [GAME_STATUSES.LOSE]: () => {
-            const loseElement = LoseComponent()
-            element.append(loseElement)
+            sectionElement.append(LoseComponent())
         },
         [GAME_STATUSES.SETTINGS]: () => {            
-            const settingsLineElement = SettingsLineComponent()
-            const settingsButtonElement = SettingsButtonComponent()
-            element.append(
-                settingsLineElement,
-                settingsButtonElement
+            sectionElement.append(
+                SettingsLineComponent(), SettingsButtonComponent()
             )
         },
         [GAME_STATUSES.WIN]: () => {
-            const winElement = WinComponent()
-            element.append(winElement)
+            sectionElement.append(WinComponent())
         },
     }
 
     transitions[status]()
 
-    return element
+    return sectionElement
 }
