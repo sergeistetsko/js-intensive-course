@@ -22,8 +22,8 @@ export const GAME_SETTINGS = {
           ]
     },
     POINTS_TO_LOSE: {
-        ID: '3',
-        TITLE: 'points-to-lose',
+        ID: 'points-to-lose',
+        TITLE: 'Points to lose',
         VALUES: [
             { value: '5', innerText: '5 pts' },
             { value: '10', innerText: '10 pts' },
