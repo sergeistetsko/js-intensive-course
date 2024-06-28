@@ -12,19 +12,19 @@ export function createNewElement(tagName, attributes = {}) {
 }
 
 export function createLineElement(innerText, options, id, selectedValue, onChangeHandler) {
-    const lineElement = document.createNewElement('div', { class: 'line' })
-    const labelElement = document.createNewElement('label', { class: 'label', innerText, for: id })
-    const selectElement = document.createElement('select', { class: 'select', name: 'select', id })
+    const lineElement = createNewElement('div', { class: 'line' })
+    const labelElement = createNewElement('label', { class: 'label', innerText, for: id })
+    const selectElement = createNewElement('select', { class: 'select', name: 'select', id })
     
     selectElement.addEventListener('change', onChangeHandler)
 
-    options.forEach((value, innerText) => {
-        const optionElement = document.createNewElement('option', { value, innerText })
+    options.forEach(({ value, innerText }) => {
+        const optionElement = createNewElement('option', { value, innerText })
         if (parseInt(value) === selectedValue) {
-            optionElement.selected = true
+          optionElement.selected = true
         }
         selectElement.append(optionElement)
-    })
+      })
 
     lineElement.append(
         labelElement, selectElement

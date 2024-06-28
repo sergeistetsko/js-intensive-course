@@ -1,57 +1,46 @@
 import { getPoints, playAgain } from '../../data/state-manager.js'
-import { GAME_MESSAGES } from '../../data/constans.js'
-import { createDivElement, createSpanElement } from '../Common/common.js'
+import { GAME_MESSAGES } from '../../data/constans-ui.js'
+import { createNewElement } from '../Utilities/Utilities.js'
 
 export function WinComponent() {
-    const modalContainer = createDivElement('modal')
+    const modalContainer = createNewElement('div', { class: 'modal' })
     const points = getPoints()
 
-    const decoration = createDivElement('modal-decoration')
-    const iconImage = document.createElement('img')
-    iconImage.src = GAME_MESSAGES.WIN.ICON
-    iconImage.alt = 'icon'
+    const decorationElement = createNewElement('div', { class: 'modal-decoration' })
 
-    const elementsContainer = createDivElement('modal-elements')
-    const title = createDivElement('title-modal')
-    title.innerText = GAME_MESSAGES.WIN.TITLE
+    const iconImageElement = document.createElement('img')
+    iconImageElement.src = GAME_MESSAGES.WIN.ICON
+    iconImageElement.alt = 'icon'
 
-    const text = createDivElement('text-modal')
-    text.innerText = GAME_MESSAGES.WIN.TEXT
+    const elementsContainer = createNewElement('div', { class: 'modal-elements' })
+    const titleElement = createNewElement('div', { class: 'title-modal', innerText: GAME_MESSAGES.WIN.TITLE })
+    const textElement = createNewElement('div', { class: 'text-modal', innerText: GAME_MESSAGES.WIN.TEXT })
 
-    const catchResultBlock = createDivElement('modal-result-block')
-    const catchTitle = createSpanElement('result-title', 'Catch: ')
-    const catchResult = createSpanElement('result', `${points.catch}`)
+    const catchResultBlock = createNewElement('div', { class: 'modal-result-block' })    
+    const catchTitle = createNewElement('span', { class: 'result-title', innerText: 'Catch: ' }) 
+    const catchResult = createNewElement('span', { class: 'result', innerText: `${points.catch}` }) 
+    
+    const missResultBlock = createNewElement('div', { class: 'modal-result-block' })    
+    const missTitle = createNewElement('span', { class: 'result-title', innerText: 'Miss: ' }) 
+    const missResult = createNewElement('span', { class: 'result', innerText: `${points.miss}` }) 
 
-    const missResultBlock = createDivElement('modal-result-block')
-    const missTitle = createSpanElement('result-title', 'Miss: ')
-    const missResult = createSpanElement('result', `${points.miss}`)
-
-    const playAgainButton = document.createElement('button')
-    playAgainButton.classList.add('button')
-    playAgainButton.append('Play again')
+    const playAgainButton = createNewElement('button', { class: 'button', innerText: 'Play again'})
     playAgainButton.addEventListener('click', playAgain)
 
     modalContainer.append(
-        decoration,
-        elementsContainer
-    )
-    decoration.append(iconImage)
-    elementsContainer.append(
-        title,
-        text,
-        catchResultBlock,
-        missResultBlock,
-        playAgainButton
+        decorationElement, elementsContainer
         )
+    decorationElement.append(iconImageElement)
+    elementsContainer.append(
+        titleElement, textElement, catchResultBlock, missResultBlock, playAgainButton
+    )
 
     catchResultBlock.append(
-        catchTitle,
-        catchResult
+        catchTitle, catchResult
         )
     missResultBlock.append(
-        missTitle,
-        missResult
-    )
+        missTitle, missResult
+        )
 
     return modalContainer
 }
