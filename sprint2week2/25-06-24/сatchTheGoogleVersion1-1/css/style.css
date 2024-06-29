@@ -116,12 +116,13 @@ select {
 .result-container {
     display: flex;
     justify-content: space-between;
-    padding: 12px 36px;
+    align-items: center;
+    padding: 5px 36px;
     border-radius: 30px;
     border: 1px solid #4C5E50;
     background-color: rgba(57, 61, 55, 0.40);
-    margin: 36px auto;
-    max-width: 376px;
+    margin: 16px auto;
+    max-width: 1024px;
     min-width: 376px;
     column-gap: 30px;
 }
@@ -130,6 +131,7 @@ select {
     display: flex;
     gap: 24px;
     justify-content: space-between;
+    align-items: center;
 }
 
 .result-title {
@@ -140,6 +142,11 @@ select {
 .result {
     font-size: 24px;
     font-weight: 500;
+}
+
+.man01-icon, .man02-icon  {
+    height: 54px;
+    width: 54px;
 }
 
 /* Table //======================================================================================================================================================== */

@@ -1,6 +1,6 @@
 import { AppComponent } from './ui/App.component.js'
 import { subscribe } from './data/state-manager.js'
-import { bindKeyboardsControlPlayer1, bindKeyboardsControlPlayer2 } from './ui/Controls/controls.js'
+import { bindKeyboardsControlPlayer1, bindKeyboardsControlPlayer2 } from './ui/Controls/Controls.js'
 
 const rootElement = document.getElementById('root')
 
