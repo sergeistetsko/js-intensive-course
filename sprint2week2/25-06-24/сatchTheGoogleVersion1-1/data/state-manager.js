@@ -5,8 +5,15 @@ const _state = {
     points: {
         google: 0,
         players: {
-            '1': {id: 1, value: 0},
-            '2': {id: 2, value: 0},
+            '1': {
+                id: 1,
+                value: 0
+            },
+            '2': 
+            {
+                id: 2,
+                value: 0
+            }
         },
     },
     settings: {
@@ -92,9 +99,7 @@ function _catchGoogle(playerId) {
 export function getPoints() {
     return {
         google: _state.points.google,
-        players: Object.values(_state.points.players).map(points => {
-            return {...points}
-    }),
+        players: Object.values(_state.points.players).map(points => {return {...points}}),
     }
 }
 
@@ -151,7 +156,7 @@ export function startGame() {
 export function playAgain() {
     _state.gameStatus = GAME_STATUSES.IN_PROGRESS
     _state.points.google = 0
-    _state.points.players.forEach(points => points.value = 0)
+    Array.from(_state.points.players).forEach(points => points.value = 0)
     _play()
     _observer()
 }

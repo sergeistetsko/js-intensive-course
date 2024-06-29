@@ -1,8 +1,6 @@
-const startTime = performance.now()
-
 export function updateTime() {
     const endTime = performance.now()
-    const differenceTime = endTime - startTime
+    const differenceTime = endTime
     const elapsedSeconds = differenceTime / 1000
     const minutes = Math.floor(elapsedSeconds / 60)
     const seconds = Math.floor(elapsedSeconds % 60 / 2)
@@ -12,3 +10,5 @@ export function updateTime() {
 
     return `${formattedMinutes}:${formattedSeconds}`
 }
+
+setInterval(updateTime, 1000)

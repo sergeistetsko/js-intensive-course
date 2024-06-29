@@ -1,11 +1,13 @@
 import { getPoints, playAgain } from '../../data/state-manager.js'
 import { GAME_MESSAGES } from '../../data/constans-ui.js'
 import { createNewElement } from '../Utilities/Utilities.js'
+import { updateTime } from '../Time/Time.js'
 
 export function WinComponent() {
     const modalContainer = createNewElement('div', { class: 'modal' })
 
     const points = getPoints()
+    const time = updateTime()
 
     const decorationElement = createNewElement('div', { class: 'modal-decoration' })
 
@@ -13,15 +15,16 @@ export function WinComponent() {
 
     const elementsContainer = createNewElement('div', { class: 'modal-elements' })
     const titleElement = createNewElement('div', { class: 'title-modal', innerText: GAME_MESSAGES.WIN.TITLE })
-    const textElement = createNewElement('div', { class: 'text-modal', innerText: GAME_MESSAGES.WIN.TEXT })
+    const textElement = createNewElement('div', { class: 'text-modal', innerText: `${GAME_MESSAGES.WIN.TEXT[0]}`})
 
     const catchResultBlock = createNewElement('div', { class: 'modal-result-block' })    
     const catchTitle = createNewElement('span', { class: 'result-title', innerText: 'Catch: ' }) 
-    const catchResult = createNewElement('span', { class: 'result', innerText: `${points.catch}` }) 
+
+    const catchResult = createNewElement('span', { class: 'result', innerText: `${points.players['1'].value.toString()}` }) 
     
-    const missResultBlock = createNewElement('div', { class: 'modal-result-block' })    
-    const missTitle = createNewElement('span', { class: 'result-title', innerText: 'Miss: ' }) 
-    const missResult = createNewElement('span', { class: 'result', innerText: `${points.miss}` }) 
+    const timeResultBlock = createNewElement('div', { class: 'modal-result-block' })    
+    const timeTitle = createNewElement('span', { class: 'result-title', innerText: 'Time: ' }) 
+    const timeResult = createNewElement('span', { class: 'result', innerText: `${time}` }) 
 
     const playAgainButton = createNewElement('button', { class: 'button', innerText: 'Play again'})
     playAgainButton.addEventListener('click', playAgain)
@@ -31,14 +34,14 @@ export function WinComponent() {
         )
     decorationElement.append(iconImageElement)
     elementsContainer.append(
-        titleElement, textElement, catchResultBlock, missResultBlock, playAgainButton
+        titleElement, textElement, catchResultBlock, timeResultBlock, playAgainButton
     )
 
     catchResultBlock.append(
         catchTitle, catchResult
         )
-    missResultBlock.append(
-        missTitle, missResult
+    timeResultBlock.append(
+        timeTitle, timeResult
         )
 
     return modalContainer
