@@ -8,9 +8,7 @@ export function LoseComponent() {
 
     const decorationElement = createNewElement('div', { class: 'modal-decoration' })
 
-    const iconImageElement = document.createElement('img')
-    iconImageElement.src = GAME_MESSAGES.LOSE.ICON
-    iconImageElement.alt = 'icon'
+    const iconImageElement = createNewElement('img', {src: GAME_MESSAGES.LOSE.ICON, alt: 'icon'})
 
     const elementsContainer = createNewElement('div', { class: 'modal-elements' })
     const titleElement = createNewElement('div', { class: 'title-modal', innerText: GAME_MESSAGES.LOSE.TITLE })

@@ -1,13 +1,10 @@
 import { startGame } from '../../data/state-manager.js'
+import { createNewElement } from '../Utilities/Utilities.js'
 
 export function SettingsButtonComponent() {
-    
-    const divElement = document.createElement('div')
-    divElement.classList.add('main-elements')
 
-    const playButtonElement = document.createElement('button')
-    playButtonElement.classList.add('button', 'main-button')
-    playButtonElement.append('START GAME')
+    const divElement = createNewElement('div', { class: 'main-elements'})
+    const playButtonElement = createNewElement('button', {class: 'button main-button', innerText: 'START GAME'})
     playButtonElement.addEventListener('click', startGame)
 
     divElement.append(

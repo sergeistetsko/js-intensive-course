@@ -4,13 +4,12 @@ import { createNewElement } from '../Utilities/Utilities.js'
 
 export function WinComponent() {
     const modalContainer = createNewElement('div', { class: 'modal' })
+
     const points = getPoints()
 
     const decorationElement = createNewElement('div', { class: 'modal-decoration' })
 
-    const iconImageElement = document.createElement('img')
-    iconImageElement.src = GAME_MESSAGES.WIN.ICON
-    iconImageElement.alt = 'icon'
+    const iconImageElement = createNewElement('img', {src: GAME_MESSAGES.WIN.ICON, alt: 'icon'})
 
     const elementsContainer = createNewElement('div', { class: 'modal-elements' })
     const titleElement = createNewElement('div', { class: 'title-modal', innerText: GAME_MESSAGES.WIN.TITLE })

@@ -7,24 +7,9 @@ export function SettingsLineComponent() {
 
     const { gridSize, pointsToWin, pointsToLose } = getSettings()
 
-    function handleSettingChangeGrid() {
-        const newValue = parseInt(select1Element.value)
-        setGridSize(newValue)
-    }
-    
-    function handleSettingChangePointsToWin() {
-        const newValue = parseInt(select2Element.value)
-        setPointsToWin(newValue)
-    }
-    
-    function handleSettingChangePointsToLose() {
-        const newValue = parseInt(select3Element.value)
-        setPointsToLose(newValue)
-    }
-
-    const [gridSizeLineElement, select1Element] = createLineElement(GAME_SETTINGS.GRID.TITLE, GAME_SETTINGS.GRID.SIZE, GAME_SETTINGS.GRID.ID, gridSize, handleSettingChangeGrid)
-    const [pointsToWinLineElement, select2Element] = createLineElement(GAME_SETTINGS.POINTS_TO_WIN.TITLE, GAME_SETTINGS.POINTS_TO_WIN.VALUES, GAME_SETTINGS.POINTS_TO_WIN.ID, pointsToWin, handleSettingChangePointsToWin)
-    const [pointsToLoseLineElement, select3Element] = createLineElement(GAME_SETTINGS.POINTS_TO_LOSE.TITLE, GAME_SETTINGS.POINTS_TO_LOSE.VALUES, GAME_SETTINGS.POINTS_TO_LOSE.ID, pointsToLose, handleSettingChangePointsToLose)
+    const [gridSizeLineElement, selectGridSizeElement] = createLineElement(GAME_SETTINGS.GRID.TITLE, GAME_SETTINGS.GRID.SIZE, GAME_SETTINGS.GRID.ID, gridSize, handleSettingChangeGrid)
+    const [pointsToWinLineElement, selectPointsToWinElement] = createLineElement(GAME_SETTINGS.POINTS_TO_WIN.TITLE, GAME_SETTINGS.POINTS_TO_WIN.VALUES, GAME_SETTINGS.POINTS_TO_WIN.ID, pointsToWin, handleSettingChangePointsToWin)
+    const [pointsToLoseLineElement, selectPointsToLoseElement] = createLineElement(GAME_SETTINGS.POINTS_TO_LOSE.TITLE, GAME_SETTINGS.POINTS_TO_LOSE.VALUES, GAME_SETTINGS.POINTS_TO_LOSE.ID, pointsToLose, handleSettingChangePointsToLose)
 
     const switchButtonElement = createNewElement('div', { class: 'switch-button'})
     const soundLabelElement = createNewElement('label', { class: 'label', innerText: 'Sound on'})
@@ -35,6 +20,21 @@ export function SettingsLineComponent() {
     })
 
     const iconSliderElement = createNewElement('span', { class: 'icon-slider'})
+
+    function handleSettingChangeGrid() {
+        const selectValue = parseInt(selectGridSizeElement.value)
+        setGridSize(selectValue)
+    }
+    
+    function handleSettingChangePointsToWin() {
+        const selectValue = parseInt(selectPointsToWinElement.value)
+        setPointsToWin(selectValue)
+    }
+    
+    function handleSettingChangePointsToLose() {
+        const selectValue = parseInt(selectPointsToLoseElement.value)
+        setPointsToLose(selectValue)
+    }
 
     toggleButtonElement.append(iconSliderElement)
     switchButtonElement.append(
