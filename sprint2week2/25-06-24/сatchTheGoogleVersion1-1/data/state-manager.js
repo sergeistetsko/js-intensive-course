@@ -1,4 +1,4 @@
-import { GAME_STATUSES } from './constans.js'
+import { GAME_STATUSES, DIRECTIONS } from './constans.js'
 
 const _state = {
     gameStatus: GAME_STATUSES.SETTINGS,
@@ -33,7 +33,7 @@ export function subscribe(subscriber) {
 }
 
 function _getRandomInt(max) {
-    return Math.floor(Math.random() * max)
+    return Math.floor(Math.random() * Math.floor(max))
 }
 
 function _setGooglePosition(newX, newY) {
@@ -45,18 +45,16 @@ function _moveGoogleToRandomPosition() {
     const newX = _getRandomInt(_state.settings.gridSize)
     const newY = _getRandomInt(_state.settings.gridSize)
 
-    if (newX === getGooglePosition().x && newY === getGooglePosition().y) {
+    if (_isCellOccupiedByGoogle({x: newX, y: newY})) {
         _moveGoogleToRandomPosition()
         return
     }
-    if (newX === getPlayerPositions()[0].x && newY === getPlayerPositions()[0].y) {
+
+    if (_isCellOccupiedByPlayer({x: newX, y: newY})) {
         _moveGoogleToRandomPosition()
         return
     }
-    if (newX === getPlayerPositions()[1].x && newY === getPlayerPositions()[1].y) {
-        _moveGoogleToRandomPosition()
-        return
-    }
+
     _setGooglePosition(newX, newY)
 }
 
@@ -86,7 +84,7 @@ function _catchGoogle(playerId) {
         clearInterval(_intervalId)
         _play()
     }
-        _observer()
+    _observer()
 }
 
 // getter/selector/query/CQS/mapper
@@ -134,6 +132,16 @@ export function getSettings() {
 
 // setter/command/mutation/side-effect
 
+export function setGridSize(gridSize) {
+    _state.settings.gridSize = gridSize
+  }
+export function setPointsToWin(pointsToWin) {
+    _state.settings.pointsToWin = pointsToWin
+  }
+export function setPointsToLose(pointsToLose) {
+    _state.settings.pointsToLose = pointsToLose
+  }
+
 export function startGame() {
     _state.gameStatus = GAME_STATUSES.IN_PROGRESS
     _play()
@@ -148,15 +156,54 @@ export function playAgain() {
     _observer()
 }
 
-export function setGridSize(gridSize) {
-    _state.settings.gridSize = gridSize
-  }
-export function setPointsToWin(pointsToWin) {
-    _state.settings.pointsToWin = pointsToWin
-  }
-export function setPointsToLose(pointsToLose) {
-    _state.settings.pointsToLose = pointsToLose
-  }
+export function movePlayer(id, direction) {
+    const position = _state.positions.players[id]
+    const newPosition = {...position}
+
+    const updater = {
+        [DIRECTIONS.UP]: () => newPosition.y--,
+        [DIRECTIONS.DOWN]: () => newPosition.y++,
+        [DIRECTIONS.LEFT]: () => newPosition.x--,
+        [DIRECTIONS.RIGHT]: () => newPosition.x++,
+    }
+    updater[direction]();
+
+    // guard/validators/checker/
+    if (!_isWithinBounds(newPosition)) return
+    if (_isCellOccupiedByPlayer(newPosition)) return
+    
+    if (_isCellOccupiedByGoogle(newPosition)) {
+        _catchGoogle(id)
+    }
+
+    _state.positions.players[id] = newPosition
+    _observer()
+}
+
+function _isWithinBounds(positions) {
+    const {x,y} = positions
+    if (x < 0 || x > _state.settings.gridSize - 1) return false
+    if (y < 0 || y > _state.settings.gridSize - 1) return false
+
+    return true
+}
+
+function _isCellOccupiedByPlayer({x,y}) {
+    if (x === getPlayerPositions()[0].x && y === getPlayerPositions()[0].y) {
+        return true
+    }
+    if (x === getPlayerPositions()[1].x && y === getPlayerPositions()[1].y) {
+        return true
+    }
+    return false
+} 
+function _isCellOccupiedByGoogle({x,y}) {
+    if (x === getGooglePosition().x && y === getGooglePosition().y) {
+        return true
+    }
+    return false
+} 
+
     
 
 

@@ -1,5 +1,6 @@
 import { AppComponent } from './ui/App.component.js'
 import { subscribe } from './data/state-manager.js'
+import { bindKeyboardsControlPlayer1, bindKeyboardsControlPlayer2 } from './ui/Controls/controls.js'
 
 const rootElement = document.getElementById('root')
 
@@ -12,5 +13,8 @@ function renderApp() {
 }
 
 renderApp()
+
+bindKeyboardsControlPlayer1()
+bindKeyboardsControlPlayer2()
 
 subscribe(renderApp)
