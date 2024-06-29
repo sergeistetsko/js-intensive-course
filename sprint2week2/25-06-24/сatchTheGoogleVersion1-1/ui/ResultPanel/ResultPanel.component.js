@@ -6,22 +6,29 @@ export function ResultPanelComponent() {
 
     const points = getPoints()
 
-    const catchResultBlock = createNewElement('div', { class: 'result-block'})    
-    const catchTitle = createNewElement('span', { class: 'result-title', innerText: 'Catch: '}) 
-    const catchResult = createNewElement('span', { class: 'result', innerText: `${points.catch}`}) 
+    const player1ResultBlock = createNewElement('div', { class: 'result-block'})    
+    const player1Title = createNewElement('span', { class: 'result-title', innerText: 'Player 1: '}) 
+    const player1Result = createNewElement('span', { class: 'result', innerText: `${points.players[0].value}`}) 
     
-    const missResultBlock = createNewElement('div', { class: 'result-block'})    
-    const missTitle = createNewElement('span', { class: 'result-title', innerText: 'Miss: '}) 
-    const missResult = createNewElement('span', { class: 'result', innerText: `${points.miss}`}) 
+    const player2ResultBlock = createNewElement('div', { class: 'result-block'})    
+    const player2Title = createNewElement('span', { class: 'result-title', innerText: 'Player 2: '}) 
+    const player2Result = createNewElement('span', { class: 'result', innerText: `${points.players[1].value}`}) 
+    
+    const googleResultBlock = createNewElement('div', { class: 'result-block'})    
+    const googleTitle = createNewElement('span', { class: 'result-title', innerText: 'Google : '}) 
+    const googleResult = createNewElement('span', { class: 'result', innerText: `${points.google}`}) 
 
     resultContainer.append(
-        catchResultBlock, missResultBlock
+        player1ResultBlock, player2ResultBlock, googleResultBlock
         )
-    catchResultBlock.append(
-        catchTitle, catchResult
+    player1ResultBlock.append(
+        player1Title, player1Result
         )
-    missResultBlock.append(
-        missTitle, missResult
+    player2ResultBlock.append(
+        player2Title, player2Result
+        )
+    googleResultBlock.append(
+        googleTitle, googleResult
         )
 
     return resultContainer
