@@ -21,6 +21,10 @@ const _state = {
         pointsToWin: 20,
         gridSize: 4,
     },
+    gameTime: {
+        minutes: 0,
+        seconds: 0,
+    },
     positions: {
         google: {
             x: 0,
@@ -30,7 +34,8 @@ const _state = {
             '1': {x: 1, y: 0},
             '2': {x: 0, y: 1},
         }
-    }
+    },
+    onPause: false
 }
 
 let _observer = () => {}
@@ -68,6 +73,7 @@ function _moveGoogleToRandomPosition() {
 let _intervalId
 
 function _play() {
+    // if (_state.onPause || _state.gameStatus !== GAME_STATUSES.IN_PROGRESS) return
     _intervalId = setInterval(() => {
         _state.points.google++
     if (_state.points.google === _state.settings.pointsToLose) {
@@ -95,11 +101,11 @@ function _catchGoogle(playerId) {
 }
 
 // getter/selector/query/CQS/mapper
-
 export function getPoints() {
     return {
         google: _state.points.google,
         players: Object.values(_state.points.players).map(points => {return {...points}}),
+        playersToWin: _state.settings.pointsToWin,
     }
 }
 
@@ -133,10 +139,16 @@ export function getSettings() {
       pointsToWin: _state.settings.pointsToWin,
       pointsToLose: _state.settings.pointsToLose,
     }
-  }
+}
+
+export function getTime() {
+    return {
+        minutes: _state.gameTime.minutes,
+        seconds: _state.gameTime.seconds,
+    }
+}
 
 // setter/command/mutation/side-effect
-
 export function setGridSize(gridSize) {
     _state.settings.gridSize = gridSize
   }
@@ -146,10 +158,17 @@ export function setPointsToWin(pointsToWin) {
 export function setPointsToLose(pointsToLose) {
     _state.settings.pointsToLose = pointsToLose
   }
+export function setTime(newMin, newSec) {
+    _state.gameTime.minutes = newMin
+    _state.gameTime.seconds = newSec
+}
 
 export function startGame() {
     _state.gameStatus = GAME_STATUSES.IN_PROGRESS
+    resetTime()
+    startTime()
     _play()
+    // _state.onPause = false
     _observer()
   }
 
@@ -157,11 +176,15 @@ export function playAgain() {
     _state.gameStatus = GAME_STATUSES.IN_PROGRESS
     _state.points.google = 0
     Array.from(_state.points.players).forEach(points => points.value = 0)
+    resetTime()
+    startTime()
     _play()
+    // _state.onPause = false
     _observer()
 }
 
 export function movePlayer(id, direction) {
+    // if (_state.gameStatus !== GAME_STATUSES.IN_PROGRESS || _state.onPause) return
     const position = _state.positions.players[id]
     const newPosition = {...position}
 
@@ -171,7 +194,7 @@ export function movePlayer(id, direction) {
         [DIRECTIONS.LEFT]: () => newPosition.x--,
         [DIRECTIONS.RIGHT]: () => newPosition.x++,
     }
-    updater[direction]();
+    updater[direction]()
 
     // guard/validators/checker/
     if (!_isWithinBounds(newPosition)) return
@@ -208,6 +231,59 @@ function _isCellOccupiedByGoogle({x,y}) {
     }
     return false
 } 
+
+if (GAME_STATUSES.SETTINGS && GAME_STATUSES.WIN && GAME_STATUSES.LOSE) {
+    clearInterval(_intervalId)
+    setTime()
+}
+
+let intervalId = null
+
+export function startTime() {
+    if (intervalId === null) {
+        intervalId = setInterval(() => {
+            let { minutes, seconds } = getTime()
+            seconds += 1
+            if (seconds >= 60) {
+                seconds = 0
+                minutes += 1
+            }
+            setTime(minutes, seconds)
+        }, 1000)
+    }
+}
+
+export function stopTime() {
+    if (intervalId !== null) {
+        clearInterval(intervalId)
+        intervalId = null
+    }
+}
+
+export function resetTime() {
+    stopTime()
+    setTime(0, 0)
+}
+
+
+// export function pauseGame() {
+//     if (_state.gameStatus === GAME_STATUSES.IN_PROGRESS) {
+//         _state.onPause = true
+//         stopTime()
+//         clearInterval(_intervalId)
+//         _intervalId = null
+//         _observer()
+//     }
+// }
+
+// export function resumeGame() {
+//     if (_state.onPause) {
+//         _state.onPause = false
+//         startTime()
+//         _play()
+//         _observer()
+//     }
+// }
 
     
 

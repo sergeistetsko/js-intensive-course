@@ -6,6 +6,7 @@ import { SettingsButtonComponent } from './Settings/SettingsButton.component.js'
 import { GridComponent } from './Grid/Grid.component.js'
 import { LoseComponent } from './Lose/Lose.component.js'
 import { WinComponent } from './Win/Win.component.js'
+import { HintComponent } from './Hint/Hint.component.js'
 import { createNewElement } from './Utilities/Utilities.js'
 
 export function AppComponent() {
@@ -16,7 +17,7 @@ export function AppComponent() {
     const transitions = {
         [GAME_STATUSES.IN_PROGRESS]: () => {
             sectionElement.append(
-                SettingsLineComponent(), ResultPanelComponent(), GridComponent()
+                SettingsLineComponent(), ResultPanelComponent(), HintComponent(), GridComponent()
             )
         },
         [GAME_STATUSES.LOSE]: () => {

@@ -207,7 +207,7 @@ select {
 }
 
 .title-modal {
-    font-size: 48px;
+    font-size: 36px;
     font-weight: 600;
     line-height: 60px;
     margin-bottom: 4px;
@@ -229,7 +229,32 @@ select {
 
 .modal-result-block {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-bottom: 24px;
 }
 
+.hint-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 580px;
+    height: 48px;
+    background: rgba(110, 117, 102, 0.6);
+    border-radius: 5px;
+    border: 2px solid #999B95;
+    gap: 12px;
+    margin: 16px auto;
+}
+
+.hint-button {
+    width: 30px;
+    height: 24px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 24px;
+    color: #75FA4C;
+    background-color: transparent;
+}

@@ -1,15 +1,14 @@
-import { getPoints } from '../../data/state-manager.js'
+import { getPoints, getTime } from '../../data/state-manager.js'
 import { Player1Component } from '../Grid/Player1/Player1.component.js'
 import { Player2Component } from '../Grid/Player2/Player2.component.js'
 import { GoogleComponent } from '../Grid/Google/Google.component.js'
 import { createNewElement } from '../Utilities/Utilities.js'
-import { updateTime } from '../Time/Time.js'
 
 export function ResultPanelComponent() {
     const resultContainer = createNewElement('div', { class: 'result-container'})
 
     const points = getPoints()
-    const time = updateTime()
+    const time = getTime()
 
     const player1ResultBlock = createNewElement('div', { class: 'result-block'})    
     const player1Title = createNewElement('span', { class: 'result-title', innerText: 'Player 1'}) 
@@ -28,7 +27,7 @@ export function ResultPanelComponent() {
 
     const timeResultBlock = createNewElement('div', { class: 'result-block'})    
     const timeTitle = createNewElement('span', { class: 'result-title', innerText: 'Time: '})
-    const timeResult = createNewElement('span', { class: 'result', innerText: `${time}`}) 
+    const timeResult = createNewElement('span', { class: 'result', innerText: `${(time.minutes).toString().padStart(2, '0')}:${(time.seconds).toString().padStart(2, '0')}`}) 
 
     player1ResultBlock.append(
         player1Title, player1Icon, player1Result
