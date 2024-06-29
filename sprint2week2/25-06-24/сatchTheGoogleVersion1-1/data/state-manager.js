@@ -20,8 +20,8 @@ const _state = {
             y: 0,
         },
         players: {
-            '1': {x: 1, y: 1},
-            '2': {x: 2, y: 2},
+            '1': {x: 1, y: 0},
+            '2': {x: 0, y: 1},
         }
     }
 }
@@ -45,7 +45,15 @@ function _moveGoogleToRandomPosition() {
     const newX = _getRandomInt(_state.settings.gridSize)
     const newY = _getRandomInt(_state.settings.gridSize)
 
-    if (newX === _state.positions.google.x && newY === _state.positions.google.y) {
+    if (newX === getGooglePosition().x && newY === getGooglePosition().y) {
+        _moveGoogleToRandomPosition()
+        return
+    }
+    if (newX === getPlayerPositions()[0].x && newY === getPlayerPositions()[0].y) {
+        _moveGoogleToRandomPosition()
+        return
+    }
+    if (newX === getPlayerPositions()[1].x && newY === getPlayerPositions()[1].y) {
         _moveGoogleToRandomPosition()
         return
     }
