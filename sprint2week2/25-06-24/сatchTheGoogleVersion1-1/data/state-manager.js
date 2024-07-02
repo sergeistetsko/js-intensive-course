@@ -5,15 +5,8 @@ const _state = {
     points: {
         google: 0,
         players: {
-            '1': {
-                id: 1,
-                value: 0
-            },
-            '2': 
-            {
-                id: 2,
-                value: 0
-            }
+            '1': {id: 1, value: 0},
+            '2': {id: 2, value: 0}
         },
     },
     settings: {
@@ -34,8 +27,7 @@ const _state = {
             '1': {x: 1, y: 0},
             '2': {x: 0, y: 1},
         }
-    },
-    onPause: false
+    }
 }
 
 let _observer = () => {}
@@ -73,7 +65,6 @@ function _moveGoogleToRandomPosition() {
 let _intervalId
 
 function _play() {
-    // if (_state.onPause || _state.gameStatus !== GAME_STATUSES.IN_PROGRESS) return
     _intervalId = setInterval(() => {
         _state.points.google++
     if (_state.points.google === _state.settings.pointsToLose) {
@@ -168,7 +159,6 @@ export function startGame() {
     resetTime()
     startTime()
     _play()
-    // _state.onPause = false
     _observer()
   }
 
@@ -179,12 +169,10 @@ export function playAgain() {
     resetTime()
     startTime()
     _play()
-    // _state.onPause = false
     _observer()
 }
 
 export function movePlayer(id, direction) {
-    // if (_state.gameStatus !== GAME_STATUSES.IN_PROGRESS || _state.onPause) return
     const position = _state.positions.players[id]
     const newPosition = {...position}
 
@@ -243,7 +231,7 @@ export function startTime() {
     if (intervalId === null) {
         intervalId = setInterval(() => {
             let { minutes, seconds } = getTime()
-            seconds += 1
+            seconds += 0.5
             if (seconds >= 60) {
                 seconds = 0
                 minutes += 1
@@ -264,27 +252,6 @@ export function resetTime() {
     stopTime()
     setTime(0, 0)
 }
-
-
-// export function pauseGame() {
-//     if (_state.gameStatus === GAME_STATUSES.IN_PROGRESS) {
-//         _state.onPause = true
-//         stopTime()
-//         clearInterval(_intervalId)
-//         _intervalId = null
-//         _observer()
-//     }
-// }
-
-// export function resumeGame() {
-//     if (_state.onPause) {
-//         _state.onPause = false
-//         startTime()
-//         _play()
-//         _observer()
-//     }
-// }
-
     
 
 
