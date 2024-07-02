@@ -2,8 +2,7 @@ export const GAME_STATUSES = {
     SETTINGS: 'settings',
     IN_PROGRESS: 'in-progress',
     WIN: 'win',
-    LOSE: 'lose',
-    // PAUSE: 'pause'
+    LOSE: 'lose'
 }
 export const DIRECTIONS = {
     UP: 'up',
