@@ -27,7 +27,7 @@ export function ResultPanelComponent() {
 
     const timeResultBlock = createNewElement('div', { class: 'result-block'})    
     const timeTitle = createNewElement('span', { class: 'result-title', innerText: 'Time: '})
-    const timeResult = createNewElement('span', { class: 'result', innerText: `${(time.minutes).toString().padStart(2, '0')}:${(time.seconds).toString().padStart(2, '0')}`}) 
+    const timeResult = createNewElement('span', { class: 'result', innerText: `${Math.floor(time.minutes).toString().padStart(2, '0')}:${Math.floor(time.seconds).toString().padStart(2, '0')}`}) 
 
     player1ResultBlock.append(
         player1Title, player1Icon, player1Result
