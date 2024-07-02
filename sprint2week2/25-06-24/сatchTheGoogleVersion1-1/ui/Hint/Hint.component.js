@@ -1,7 +1,5 @@
 import { createNewElement } from '../Utilities/Utilities.js'
 
-let isHidden = false
-
 export function HintComponent() {
 
     const hintBlockElement = createNewElement('div', { class: 'hint-block'})
