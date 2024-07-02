@@ -74,7 +74,7 @@ function _play() {
         _moveGoogleToRandomPosition()
     }
         _observer()
-    }, 2000)
+    }, 1000)
 }
 
 function _catchGoogle(playerId) {
@@ -231,7 +231,7 @@ export function startTime() {
     if (intervalId === null) {
         intervalId = setInterval(() => {
             let { minutes, seconds } = getTime()
-            seconds += 0.5
+            seconds += 1
             if (seconds >= 60) {
                 seconds = 0
                 minutes += 1
